@@ -27,6 +27,8 @@ body {
     box-shadow: 6px 0px 0px #ffffff;
     outline: transparent;
     position: relative;
+    animation: .5s glitch;
+    animation-iteration-count:1;
   }
   
   button::after {

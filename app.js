@@ -6,7 +6,7 @@ import * as THREE from './three.module.js';
 var scene;
 var camera;
 var renderer;
-var isSceneLoaded;
+var isHit = false;
 var reticle;
 var model;
 
@@ -95,9 +95,16 @@ async function activateXR()
                 const hitPose = hitTestResults[0].getPose(referenceSpace);
 
                 // Update the reticle position
-                reticle.visible = true;
-                reticle.position.set(hitPose.transform.position.x, hitPose.transform.position.y, hitPose.transform.position.z)
-                reticle.updateMatrixWorld(true);
+                if(isHit == false)
+                {
+                    reticle.visible = true;
+                    reticle.position.set(hitPose.transform.position.x, hitPose.transform.position.y, hitPose.transform.position.z)
+                    reticle.updateMatrixWorld(true);
+                }
+                else
+                {
+                    HideReticle();
+                }              
             }
 
 
@@ -113,28 +120,38 @@ async function activateXR()
 
     
 function OnHit()
-{
-    //load content at hit location
-    // const clone = model.clone();
-    // clone.position.copy(reticle.position);
-    // scene.add(clone);
+{ 
     model.visible = true;
     model.position.copy(reticle.position);
     model.lookAt(camera.position);
     var rotation = model.rotation;
     var newRotation = new THREE.Euler(0,rotation.y,0,'XYZ');
     model.setRotationFromEuler(newRotation);
-    
+
+    isHit = true;
 }
 
 function LoadReticle()
 {
     const rLoader = new GLTFLoader();
-    rLoader.load("https://immersive-web.github.io/webxr-samples/media/gltf/reticle/reticle.gltf",(gltf)=>{
+    rLoader.load("reticle.gltf",(gltf)=>{
+
+        gltf.scene.traverse(function(child){
+            if(child.isMesh)
+            {
+                child.material.alphaTest = 0.5;
+            }
+        });
+
         reticle = gltf.scene;
         reticle.visible = false;
         scene.add(reticle);
     });
+}
+
+function HideReticle()
+{
+    reticle.visible = false;
 }
 
 
