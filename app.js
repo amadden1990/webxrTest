@@ -25,6 +25,9 @@ var model;
     {
         var a = document.getElementById("usdz");
         a.setAttribute("href","techCity.usdz");
+
+        var img = document.getElementById("preview");
+        img.setAttribute("src","techCity-preview.png");
     }
 
 
