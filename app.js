@@ -13,6 +13,7 @@ var model;
 //Listen for button press to enter ar
 (async function()
 {
+    console.log(navigator.userAgent);
     //check for mobile os name. if android then register event listener to activate the XR session.
     //if ios or apple anything, populate enter ar button with link to usdz file
     if(/Android/i.test(navigator.userAgent))
