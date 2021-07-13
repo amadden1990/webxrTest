@@ -13,7 +13,21 @@ var model;
 //Listen for button press to enter ar
 (async function()
 {
-    document.getElementById("enter-ar").addEventListener("click",activateXR)
+    //check for mobile os name. if android then register event listener to activate the XR session.
+    //if ios or apple anything, populate enter ar button with link to usdz file
+    if(/Android/i.test(navigator.userAgent))
+    {
+        document.getElementById("enter-ar").addEventListener("click",activateXR);
+    }
+    
+    if(/iPhone|iPad|iPod/i.test(navigator.userAgent))
+    {
+        var a = document.getElementById("enter-ar");
+        a.href = "techCity.usdz";
+    }
+
+
+    
 })();
 
 
