@@ -23,7 +23,7 @@ var model;
     
     if(/iPhone|iPad|iPod/i.test(navigator.userAgent))
     {
-        var a = document.getElementById("enter-ar");
+        var a = document.getElementById("usdz");
         a.setAttribute("href","techCity.usdz");
     }
 
