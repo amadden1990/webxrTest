@@ -18,6 +18,13 @@ var model;
     //if ios or apple anything, populate enter ar button with link to usdz file
     if(/Android/i.test(navigator.userAgent))
     {
+        var usdz = document.getElementById("usdz");
+        usdz.remove();
+
+        var button = document.createElement("button");
+        document.body.appendChild(button);
+        button.id = "enter-ar";
+        button.innerHTML = "Enter AR";
         document.getElementById("enter-ar").addEventListener("click",activateXR);
     }
     
